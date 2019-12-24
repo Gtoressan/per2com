@@ -1,0 +1,77 @@
+﻿<Page x:Class="Per2com.AdminWPF.Views.GraphicsCard.CreatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GraphicsCard/CreatePage">
+
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Navigation title.-->
+		<TextBlock Style="{StaticResource BrowsedPageNavTitle}"
+				   Text="Видеокарты / Добавление видеокарты"/>
+
+		<!--Page caption.-->
+		<DockPanel Grid.Row="1">
+			<TextBlock DockPanel.Dock="Left"
+					   Style="{StaticResource BrowsedPageCaption}"
+					   Text="Добавление видеокарты"/>
+			<StackPanel HorizontalAlignment="Right">
+				<Button Content=""
+						Command="{Binding Owner.SetPage}"
+						CommandParameter="GraphicsCard/IndexPage"
+						Style="{StaticResource BrowsedPageToolButton}"
+						ToolTip="Отменить добавление."/>
+			</StackPanel>
+		</DockPanel>
+
+		<!--Property editor.-->
+		<ScrollViewer Grid.Row="3"
+					  Style="{StaticResource BrowsedPageGroupsScroller}">
+			<StackPanel>
+				<!--GraphicsCard's manufacturer combo box-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<ComboBox ItemsSource="{Binding Item.Manufacturers}"
+							  SelectedItem="{Binding Item.Manufacturer}"
+							  Style="{StaticResource BrowsedPageGroupComboBox}"/>
+				</StackPanel>
+
+				<!--GraphicsCard's name editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Наименование:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Name}"/>
+				</StackPanel>
+
+				<!--GraphicsCard's capacity editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Объем (в Гб):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Capacity}"/>
+				</StackPanel>
+
+				<!--GraphicsCard's ьуьщкн ензу editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Тип графической памяти:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.MemoryType}"/>
+				</StackPanel>
+
+				<!--Creation button.-->
+				<Button Content="Внести в базу"
+						Command="{Binding Create}"
+						Style="{StaticResource BrowsedPageButton}"/>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

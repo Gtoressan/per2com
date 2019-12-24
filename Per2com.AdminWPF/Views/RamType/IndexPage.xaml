@@ -1,0 +1,85 @@
+﻿<Page x:Class="Per2com.AdminWPF.Views.RamType.IndexPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+	  Name="page"
+      Title="RamType/IndexPage">
+
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Navigation title.-->
+		<TextBlock Style="{StaticResource BrowsedPageNavTitle}"
+				   Text="Типы RAM"/>
+
+		<!--Page caption.-->
+		<DockPanel Grid.Row="1">
+			<TextBlock DockPanel.Dock="Left"
+					   Style="{StaticResource BrowsedPageCaption}"
+					   Text="Список типов RAM"/>
+			<StackPanel HorizontalAlignment="Right">
+				<Button Content=""
+						Command="{Binding Owner.SetPage}"
+						CommandParameter="RamType/CreatePage"
+						Style="{StaticResource BrowsedPageToolButton}"
+						ToolTip="Добавить тип RAM."/>
+			</StackPanel>
+		</DockPanel>
+
+		<!--Filtrator zone-->
+		<StackPanel Grid.Row="2">
+			<ScrollViewer Style="{StaticResource BrowsedPageFiltratorScroller}">
+				<StackPanel>
+					<!--Ram type's name filter.-->
+					<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+						<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+								   Text="Наименование:"/>
+						<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+								 Text="{Binding Filtrator.Name}"/>
+					</StackPanel>
+				</StackPanel>
+			</ScrollViewer>
+
+			<!--Creation button.-->
+			<Button Content="Фильтровать/сбросить"
+					Command="{Binding Filter}"
+					DockPanel.Dock="Right"
+					Style="{StaticResource BrowsedPageButton}"/>
+		</StackPanel>
+
+		<!--Data table-->
+		<DataGrid Grid.Row="3"
+				  ItemsSource="{Binding Source}"
+				  SelectedItem="{Binding SelectedItem}"
+				  Style="{StaticResource BrowsedPageDataGrip}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+				<DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button Content="Редактировать"
+									Command="{Binding DataContext.Edit, ElementName=page}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn>
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Button Content="Удалить"
+									Command="{Binding DataContext.Delete, ElementName=page}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</Page>

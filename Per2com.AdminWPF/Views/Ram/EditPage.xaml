@@ -1,0 +1,92 @@
+﻿<Page x:Class="Per2com.AdminWPF.Views.Ram.EditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Ram/EditPage">
+
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Navigation title.-->
+		<TextBlock Style="{StaticResource BrowsedPageNavTitle}"
+				   Text="ОЗУ / Редактирование ОЗУ"/>
+
+		<!--Page caption.-->
+		<DockPanel Grid.Row="1">
+			<TextBlock DockPanel.Dock="Left"
+					   Style="{StaticResource BrowsedPageCaption}"
+					   Text="Редактирование данных об ОЗУ"/>
+			<StackPanel HorizontalAlignment="Right">
+				<Button Content=""
+						Command="{Binding Owner.SetPage}"
+						CommandParameter="Ram/IndexPage"
+						Style="{StaticResource BrowsedPageToolButton}"
+						ToolTip="Отменить редактирование."/>
+			</StackPanel>
+		</DockPanel>
+
+		<!--Property editor.-->
+		<ScrollViewer Grid.Row="2"
+					  Style="{StaticResource BrowsedPageGroupsScroller}">
+			<StackPanel>
+				<!--RAM's manufacturer combo box-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<ComboBox ItemsSource="{Binding Item.Manufacturers}"
+							  SelectedItem="{Binding Item.Manufacturer}"
+							  Style="{StaticResource BrowsedPageGroupComboBox}"/>
+				</StackPanel>
+
+				<!--RAM's ram type combo box-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<ComboBox ItemsSource="{Binding Item.RamTypes}"
+							  SelectedItem="{Binding Item.RamType}"
+							  Style="{StaticResource BrowsedPageGroupComboBox}"/>
+				</StackPanel>
+
+				<!--RAM's name editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Наименование:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Name}"/>
+				</StackPanel>
+
+				<!--RAM's capacity editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Объем (в Гб):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Capacity}"/>
+				</StackPanel>
+
+				<!--RAM's frequency editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Тактовая частота (в ГГц):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Frequency}"/>
+				</StackPanel>
+
+				<!--RAM's СL editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="CAS Latency:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.CL}"/>
+				</StackPanel>
+
+				<!--Editing button.-->
+				<Button Content="Сохранить изменения"
+						Command="{Binding Edit}"
+						Style="{StaticResource BrowsedPageButton}"/>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

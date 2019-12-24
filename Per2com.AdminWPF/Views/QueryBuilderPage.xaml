@@ -1,0 +1,80 @@
+﻿<Page x:Class="Per2com.AdminWPF.Views.QueryBuilderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+	  Name="page"
+      Title="QueryBuilderPage">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Caption.-->
+		<TextBlock Style="{StaticResource BrowsedPageCaption}"
+				   Text="Конструктор запросов"/>
+
+		<!--Menu.-->
+		<DockPanel Grid.Row="1">
+			<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+				<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+						   Text="Выберите целевую таблицу"/>
+				<ComboBox ItemsSource="{Binding Tables}"
+						  Style="{StaticResource BrowsedPageGroupComboBox}"
+						  SelectedItem="{Binding Table}"/>
+			</StackPanel>
+			<Button Content="Загрузить атрибуты"
+					Command="{Binding GetTokens}"
+					Style="{StaticResource BrowsedPageButton}"/>
+			<Grid HorizontalAlignment="Right">
+				<Button Content=""
+						Command="{Binding AddToken}" 
+						Style="{StaticResource BrowsedPageToolButton}"
+						ToolTip="Добавить токен."/>
+			</Grid>
+		</DockPanel>
+
+		<!--Token zone-->
+		<ScrollViewer Grid.Row="2"
+					  Style="{StaticResource BrowsedPageGroupsScroller}">
+			<StackPanel>
+				<ListBox ItemsSource="{Binding TokenVM}"
+						 Name="listBox">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal"
+											Style="{StaticResource BrowsedPageGroupPanel}">
+								<ComboBox ItemsSource="{Binding Tokens}"
+										  Name="token"
+										  Style="{StaticResource BrowsedPageGroupComboBox}"
+										  SelectedItem="{Binding Token}"/>
+								<ComboBox ItemsSource="{Binding Conditions}"
+										  Style="{StaticResource BrowsedPageGroupComboBox}"
+										  SelectedItem="{Binding Token.Condition}"/>
+								<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+										 Text="{Binding Token.Value}"
+										 MinWidth="10"/>
+								<Button Content=""
+										Command="{Binding DataContext.RemoveToken, ElementName=page}" 
+										CommandParameter="{Binding Id}"
+										Style="{StaticResource BrowsedPageToolButton}"
+										ToolTip="Удалить токен."/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+				<!--Execution button.-->
+				<Button Content="Сохранить в Excel"
+						Command="{Binding Select}"
+						DockPanel.Dock="Right"
+						Style="{StaticResource BrowsedPageButton}"/>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

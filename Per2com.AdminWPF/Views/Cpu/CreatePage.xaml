@@ -1,0 +1,116 @@
+﻿<Page x:Class="Per2com.AdminWPF.Views.Cpu.CreatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Cpu/CreatePage">
+
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!--Navigation title.-->
+		<TextBlock Style="{StaticResource BrowsedPageNavTitle}"
+				   Text="Процессоры / Добавление процессора"/>
+
+		<!--Page caption.-->
+		<DockPanel Grid.Row="1">
+			<TextBlock DockPanel.Dock="Left"
+					   Style="{StaticResource BrowsedPageCaption}"
+					   Text="Добавление процессора"/>
+			<StackPanel HorizontalAlignment="Right">
+				<Button Content=""
+						Command="{Binding Owner.SetPage}"
+						CommandParameter="Cpu/IndexPage"
+						Style="{StaticResource BrowsedPageToolButton}"
+						ToolTip="Отменить добавление."/>
+			</StackPanel>
+		</DockPanel>
+
+		<!--Property editor.-->
+		<ScrollViewer Grid.Row="3"
+					  Style="{StaticResource BrowsedPageGroupsScroller}">
+			<StackPanel>
+				<!--Cpu's manufacturer combo box-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<ComboBox ItemsSource="{Binding Item.Manufacturers}"
+							  SelectedItem="{Binding Item.Manufacturer}"
+							  Style="{StaticResource BrowsedPageGroupComboBox}"/>
+				</StackPanel>
+
+				<!--Cpu's socket combo box-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<ComboBox ItemsSource="{Binding Item.Sockets}"
+							  SelectedItem="{Binding Item.Socket}"
+							  Style="{StaticResource BrowsedPageGroupComboBox}"/>
+				</StackPanel>
+
+				<!--Cpu's name editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Наименование:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Name}"/>
+				</StackPanel>
+
+				<!--Cpu's thread count editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Число потоков:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.ThreadCount}"/>
+				</StackPanel>
+
+				<!--Cpu's core count editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Число ядер:"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.CoreCount}"/>
+				</StackPanel>
+
+				<!--Cpu's L1 cash capacity editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Объем кеша 1-го уровня (в Кб):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.L1}"/>
+				</StackPanel>
+
+				<!--Cpu's L2 cash capacity editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Объем кеша 2-го уровня (в Кб):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.L2}"/>
+				</StackPanel>
+
+				<!--Cpu's L3 cash capacity editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Объем кеша 3-го уровня (в Кб):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.L3}"/>
+				</StackPanel>
+
+				<!--Cpu's frequency editor.-->
+				<StackPanel Style="{StaticResource BrowsedPageGroupPanel}">
+					<TextBlock Style="{StaticResource BrowsedPageGroupLabel}"
+							   Text="Частота (в ГГц):"/>
+					<TextBox Style="{StaticResource BrowsedPageGroupBox}"
+							 Text="{Binding Item.Frequency}"/>
+				</StackPanel>
+
+				<!--Creation button.-->
+				<Button Content="Внести в базу"
+						Command="{Binding Create}"
+						Style="{StaticResource BrowsedPageButton}"/>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>
